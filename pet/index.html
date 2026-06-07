@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>PetCity</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- SPLASH -->
+<div id="splash">
+  <div class="splash-content">
+    <h1>🐾 PetCity</h1>
+    <p>Find your perfect companion 🐶 🐱 🐟</p>
+  </div>
+</div>
+
+<header class="navbar">
+  <div class="logo" onclick="window.location.href='index.html'">
+    🐾 PetCity
+  </div>
+  <div id="navButtons"></div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <h1>Welcome to PetCity</h1>
+  <p>Find your perfect companion 🐶🐱🐟</p>
+</section>
+
+<!-- CONTROLS -->
+<div class="controls">
+
+  <div class="search-box">
+    <input id="search" placeholder="Search pets..." oninput="UI.home()">
+  </div>
+
+  <div class="filter-buttons">
+    <button onclick="UI.setFilter('', this)" class="active">All</button>
+    <button onclick="UI.setFilter('Dog', this)">🐶 Dog</button>
+    <button onclick="UI.setFilter('Cat', this)">🐱 Cat</button>
+    <button onclick="UI.setFilter('Parrot', this)">🦜 Parrot</button>
+    <button onclick="UI.setFilter('Hamster', this)">🐹 Hamster</button>
+    <button onclick="UI.setFilter('Fish', this)">🐟 Fish</button>
+  </div>
+
+  <select id="sort" onchange="UI.home()">
+    <option value="">Sort</option>
+    <option value="az">A-Z</option>
+    <option value="new">Newest</option>
+  </select>
+
+</div>
+
+<!-- LOADER -->
+<div id="loader">
+  <div class="spinner"></div>
+</div>
+
+<!-- MAIN -->
+<main id="app"></main>
+
+<!-- SCRIPTS -->
+<script src="js/storage.js"></script>
+<script src="js/pets.js"></script>
+<script src="js/upload.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/admin.js"></script>
+<script src="js/ui.js"></script>
+
+<script>
+window.onload = () => {
+
+  UI.applyTheme();
+  Auth.init();
+  UI.updateNavbar();
+
+  let splash = document.getElementById("splash");
+
+  if(localStorage.getItem("skipSplash") === "true"){
+
+    localStorage.removeItem("skipSplash");
+    splash.style.display = "none";
+
+    UI.showLoader();
+
+    setTimeout(()=>{
+      UI.home();
+      UI.hideLoader();
+    }, 100);
+
+  } else {
+
+    UI.showSplash(()=>{
+      UI.showLoader();
+
+      setTimeout(()=>{
+        UI.home();
+        UI.hideLoader();
+      }, 100);
+    });
+
+  }
+};
+
+</script>
+
+</body>
+</html>

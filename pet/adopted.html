@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Adopted Pets - PetCity</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<header class="navbar">
+  <div class="logo" onclick="window.location.href='index.html'">🐾 PetCity</div>
+  <div id="navButtons"></div>
+</header>
+
+<main id="app"></main>
+
+<script src="js/storage.js"></script>
+<script src="js/pets.js"></script>
+<script src="js/upload.js"></script>
+<script src="js/auth.js"></script>   
+<script src="js/admin.js"></script>
+<script src="js/ui.js"></script>
+<script>
+window.onload = () => {
+   UI.applyTheme(); 
+  UI.updateNavbar();
+  Admin.viewAdopted();
+};
+</script>
+
+</body>
+</html>
